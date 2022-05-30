@@ -21,5 +21,7 @@ and push the equals sign multiple times as you would in a normal calculator appl
 
 ### Future Improvements
 Dynamic resizing of font size in the calculator's display to prevent overflow
+
 Adding TypeScript
+
 Adding unit tests to ensure correct functionality
