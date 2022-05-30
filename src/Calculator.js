@@ -6,6 +6,7 @@ const Calculator = () => {
   const [operand1, setOperand1] = useState("");
   const [prevCalc, setPrevCalc] = useState(false);
   const [operator, setOperator] = useState("");
+  const [equalFlag, setEqualFlag] = useState(false);
 
   const operators = "*-+/";
 
@@ -14,16 +15,20 @@ const Calculator = () => {
     setOperand1("");
     setOperator("");
     setPrevCalc(false);
+    setEqualFlag(false);
   }
 
   function readInput(keyId) {
     if (keyId === "0" && result === "0") {
       return;
-    } else if (keyId === "AC") {
+    } 
+    
+    if (keyId === "AC") {
       clear();
       return;
     } else if (keyId === "=") {
       showResults();
+      setEqualFlag(true);
     } else if (keyId === "negate") {
       setResult((prevState) => {
         if (prevState.includes("-")) {
@@ -45,8 +50,9 @@ const Calculator = () => {
     }
 
     if (operators.includes(keyId)) {
-      if (operator) {
-        showResults();
+      if (operator && !equalFlag) {
+        const calculated = showResults();
+        setOperand1(calculated); //in order to chain operations, we need to set operand1 to the new calculated result
       } else {
         setOperand1(result);
       }
@@ -69,32 +75,37 @@ const Calculator = () => {
     }
   }
 
-  console.log(operand1, result, operator, prevCalc);
-
   function showResults() {
     let calculated = '';
+    const op1 = prevCalc ? result : operand1;
+    const op2 = prevCalc ? operand1 : result;
+    
     switch (operator) {
       case "-":
-        calculated = (parseFloat(operand1) - parseFloat(result)).toString();
+        calculated = (parseFloat(op1) - parseFloat(op2)).toString();
         break;
       case "+":
-        calculated = (parseFloat(operand1) + parseFloat(result)).toString();
+        calculated = (parseFloat(op1) + parseFloat(op2)).toString();
         break;
       case "*":
-        calculated = (parseFloat(operand1) * parseFloat(result)).toString();
+        calculated = (parseFloat(op1) * parseFloat(op2)).toString();
         break;
       case "/":
         calculated = 
           (
-            Math.round((parseFloat(operand1) / parseFloat(result)) * 100000000) /
-            100000000
+            Math.round((parseFloat(op1) / parseFloat(op2)) * 10000000) /
+            10000000
           ).toString();
         break;
       default:
     }
+
+    if(!prevCalc)
+      setOperand1(result);
+
     setPrevCalc(true);
-    setOperand1(calculated);
     setResult(calculated);
+    return calculated;
   }
 
   return (

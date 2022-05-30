@@ -11,28 +11,18 @@ const theme = {
   }
 };
 
-const myTheme = {
-  colors: {
-    base: "#3C2601",
-    accent: "#ff9f0c",
-    secondary: "#7D6E5A",
-    button: "#9E9283",
-    font: "white"
-  }
-}
-
 const alternateTheme = {
   colors: {
-    base: "rgba(0, 0, 0, 0.7)",
+    base: "rgba(0, 0, 0, 0.5)",
     accent: "#cc0000",
-    secondary: "rgba(0, 0, 0, 0.4)",
-    button: "rgba(0, 0, 0, 0.2)",
+    secondary: "rgba(0, 0, 0, 0.3)",
+    button: "rgba(0, 0, 0, 0.1)",
     font: "black"
   }
 };
 
 const Theme = ({ children }) => (
-  <ThemeProvider theme={myTheme}>{children}</ThemeProvider>
+  <ThemeProvider theme={alternateTheme}>{children}</ThemeProvider>
 );
 
 export default Theme;

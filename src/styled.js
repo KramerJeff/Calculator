@@ -1,6 +1,12 @@
 import styled from 'styled-components';
 
 const Container = styled.div`
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
   display: block;
   width: 225px;
   box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.6);
@@ -11,7 +17,7 @@ const Result = styled.div`
   display: flex;
   justify-content: flex-end;
   align-items: flex-end;
-  height: 4.75rem;
+  height: 6rem;
   background-color: ${(props) => `${props.theme.colors.base}`};
   color: white;
   font-size: 2.25rem;
